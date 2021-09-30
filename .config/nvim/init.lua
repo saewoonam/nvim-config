@@ -70,14 +70,42 @@ plug {'savq/paq-nvim', opt=true}
 -- Plugin list
 
 plug {'nvim-lua/plenary.nvim'}
--- plug {'nvim-treesitter/nvim-treesitter'}
+plug {'nvim-treesitter/nvim-treesitter'}
 plug {'phaazon/hop.nvim'}
 plug {'tpope/vim-commentary'}
 plug {'tpope/vim-fugitive'}
 plug {'tpope/vim-surround'}
+plug {'nvim-telescope/telescope.nvim'}
+plug {'p00f/nvim-ts-rainbow'}
+plug {'lukas-reineke/indent-blankline.nvim'}
 
 -- Auto install and clean plugins
 
 require('paq-nvim').install()
 require('paq-nvim').clean()
 
+-- Theme
+
+-- cmd 'autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE'
+-- cmd 'colorscheme delek'
+
+-- treesitter/rainbow
+
+require'nvim-treesitter.configs'.setup {
+  rainbow = {
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+    colors = {}, -- table of hex strings
+    termcolors = {} -- table of colour name strings
+  }
+}
+
+-- indent_blankline
+o.list = true
+o.listchars:append("eol:↴")
+
+require("indent_blankline").setup {
+    buftype_exclude = {"terminal"},
+    show_end_of_line = true,
+}
