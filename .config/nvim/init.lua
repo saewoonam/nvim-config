@@ -27,6 +27,7 @@ o.signcolumn = 'yes'
 o.splitbelow = true
 o.splitright = true
 o.tabstop = 4
+o.softtabstop = 4
 o.termguicolors = true
 o.undofile = true
 o.updatetime = 100
@@ -88,12 +89,13 @@ plug {'tpope/vim-fugitive'}
 plug {'tpope/vim-surround'}
 plug {'nvim-telescope/telescope.nvim'}
 plug {'p00f/nvim-ts-rainbow'}
-plug {'lukas-reineke/indent-blankline.nvim'}
--- plug {'yggdroot/indentline'}
+-- plug {'lukas-reineke/indent-blankline.nvim'}
+plug {'yggdroot/indentline'}
+-- plug {'nathanaelkane/vim-indent-guides'}
 plug {'jacoborus/tender.vim'}
+plug {'tamelion/neovim-molokai'}
 plug {'khaveesh/vim-fish-syntax'}
 plug {'lewis6991/gitsigns.nvim'}  -- Needs plenary.vim
--- plug {'numToStr/FTerm.nvim'}
 plug {'numtostr/FTerm.nvim'}
 
 -- Auto install and clean plugins
@@ -127,7 +129,10 @@ require'nvim-treesitter.configs'.setup {
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+    enable = true
   },
   rainbow = {
     enable = true,
@@ -138,29 +143,31 @@ require'nvim-treesitter.configs'.setup {
   }
 }
 -- indent_blankline
- o.list = true
- -- o.listchars:append("eol:↴")
-
- require("indent_blankline").setup {
-     char = '|',
-     buftype_exclude = {"terminal"},
-     show_end_of_line = false,
- }
+-- o.list = true
+-- o.listchars:append("eol:↴")
+-- o.listchars:append("space:⋅")
+-- require("indent_blankline").setup {
+--      char = '|',
+--      -- buftype_exclude = {"terminal"},
+--      show_end_of_line = false,
+-- }
+-- g.indent_blankline_use_treesitter=true
+-- g.indent_blankline_char='┊'
 
  -- gitsigns
  
- require('gitsigns').setup()
+require('gitsigns').setup()
 
  -- Fterm
  
- require'FTerm'.setup({
-     border = 'double',
-     dimensions  = {
-         height = 0.9,
-         width = 0.9,
-     },
- })
- local opts = { noremap = true, silent = true }
+require'FTerm'.setup({
+    border = 'double',
+    dimensions  = {
+        height = 0.9,
+        width = 0.9,
+    },
+})
+local opts = { noremap = true, silent = true }
 
 if vim.fn.has('macunix') == 1 then
     map('n', '<D-i>', '<CMD>lua require("FTerm").toggle()<CR>', opts)
